@@ -19,7 +19,7 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {};
   locale:
@@ -104,7 +104,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   firstname?: string | null;
   lastname?: string | null;
   username?: string | null;
@@ -125,7 +125,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -144,23 +144,23 @@ export interface Media {
  * via the `definition` "hymnals".
  */
 export interface Hymnal {
-  id: number;
+  id: string;
   title: string;
   number: number;
   content: string;
   audio?:
     | {
-        audioFile?: (number | null) | Media;
+        audioFile?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
   sheet?:
     | {
-        sheetImage?: (number | null) | Media;
+        sheetImage?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
-  cover?: (number | null) | Media;
+  cover?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -169,24 +169,24 @@ export interface Hymnal {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'hymnals';
-        value: number | Hymnal;
+        value: string | Hymnal;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -196,10 +196,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -219,7 +219,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
