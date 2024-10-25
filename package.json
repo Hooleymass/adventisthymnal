@@ -15,17 +15,21 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payloadcms/db-mongodb": "^1.7.3",
+    "@payloadcms/db-postgres": "^0.8.9",
+    "@payloadcms/db-sqlite": "beta",
     "@payloadcms/next": "beta",
     "@payloadcms/plugin-cloud": "beta",
     "@payloadcms/richtext-lexical": "beta",
+    "@websolutespa/payload-plugin-localization": "^1.7.0",
+    "@websolutespa/payload-utils": "^0.0.2",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.0.0",
     "payload": "beta",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020",
-    "sharp": "0.32.6",
-    "@payloadcms/db-sqlite": "beta"
+    "sharp": "0.32.6"
   },
   "devDependencies": {
     "@types/node": "^22.5.4",

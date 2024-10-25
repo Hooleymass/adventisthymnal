@@ -13,14 +13,70 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    hymnals: Hymnal;
+    'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   globals: {};
-  locale: null;
+  locale:
+    | 'en'
+    | 'es'
+    | 'pt'
+    | 'zh'
+    | 'sw'
+    | 'kis'
+    | 'ki'
+    | 'kam'
+    | 'luo'
+    | 'luy'
+    | 'fr'
+    | 'de'
+    | 'it'
+    | 'ru'
+    | 'hi'
+    | 'ar'
+    | 'ja'
+    | 'ko'
+    | 'bn'
+    | 'pa'
+    | 'ur'
+    | 'ta'
+    | 'te'
+    | 'ml'
+    | 'gu'
+    | 'mr'
+    | 'kn'
+    | 'or'
+    | 'as'
+    | 'sa'
+    | 'ne'
+    | 'nl'
+    | 'sv'
+    | 'da'
+    | 'no'
+    | 'fi'
+    | 'el'
+    | 'tr'
+    | 'pl'
+    | 'cs'
+    | 'ro'
+    | 'uk'
+    | 'bg'
+    | 'sl'
+    | 'hr'
+    | 'sr'
+    | 'sq'
+    | 'mk'
+    | 'fa'
+    | 'vi'
+    | 'id'
+    | 'th'
+    | 'tl'
+    | 'yue';
   user: User & {
     collection: 'users';
   };
@@ -48,7 +104,11 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
+  firstname?: string | null;
+  lastname?: string | null;
+  username?: string | null;
+  roles: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -65,7 +125,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -81,13 +141,65 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hymnals".
+ */
+export interface Hymnal {
+  id: number;
+  title: string;
+  number: number;
+  content: string;
+  audio?:
+    | {
+        audioFile?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  sheet?:
+    | {
+        sheetImage?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  cover?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
+export interface PayloadLockedDocument {
+  id: number;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'hymnals';
+        value: number | Hymnal;
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -107,7 +219,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
