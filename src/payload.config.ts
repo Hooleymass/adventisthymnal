@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 
-import { Hymnals, Media, Users } from './payload/collections'
+import { English, French, Media, Portuguese, Russian, Spanish, Swahili, Users } from './payload/collections'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 
 
@@ -82,7 +82,7 @@ export default buildConfig({
     fallback: true, // Fallback to default locale if translation not available
   },
 
-  collections: [Users, Media, Hymnals],
+  collections: [Users, Media, English, Spanish, French, Portuguese, Swahili, Russian],
   cors: ['https://checkout.stripe.com', 'https://chikiimass.me', 'https://www.chikiimass.me', `${process.env.NEXT_PUBLIC_SITE_URL}` || ''],
   csrf: ['https://checkout.stripe.com', 'https://chikiimass.me', 'https://www.chikiimass.me', process.env.NEXT_PUBLIC_SITE_URL || ''],
   editor: lexicalEditor(),
