@@ -157,7 +157,8 @@ export const Hymnals: CollectionConfig = {
             {
               name: 'title',
               type: 'relationship',
-              relateTo: COLLECTIONS_SLUG_HYMNALS,
+              relationTo: COLLECTIONS_SLUG_HYMNALS,
+              hasMany: true,
             },
           ]
         },
